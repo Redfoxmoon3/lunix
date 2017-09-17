@@ -16,7 +16,7 @@ include $(d)/../GNUmakefile
 #
 # C O M P I L A T I O N  F L A G S
 #
-LUAPATH_$(d) = $(shell env CC="$(CC)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" $(<D)/../mk/luapath -krxm3 -I$(DESTDIR)$(includedir) -I/usr/include -I/usr/local/include -P$(DESTDIR)$(bindir) -P$(bindir) -L$(DESTDIR)$(libdir) -L$(libdir) -v$(1) $(2))
+LUAPATH_$(d) = $(shell env CC="$(CC)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" $(<D)/../mk/luapath -krxm3 -I$(DESTDIR)$(includedir) -P$(DESTDIR)$(bindir) -P$(bindir) -L$(DESTDIR)$(libdir) -L$(libdir) -v$(1) $(2))
 
 CPPFLAGS_$(d) = $(CPPFLAGS_$(abspath $(@D)/../..))
 CFLAGS_$(d) = $(CFLAGS_$(abspath $(@D)/../..))
@@ -33,7 +33,7 @@ ifeq ($(shell uname -s), SunOS)
 LDFLAGS_$(d) += -lsocket -lnsl
 endif
 
-LDFLAGS_$(d) += -lm
+LDFLAGS_$(d) += -llua
 
 
 #
@@ -120,7 +120,7 @@ install5.2: liblua5.2-unix-install
 
 install5.3: liblua5.3-unix-install
 
-install: install5.1 install5.2
+install: install5.3
 
 .PHONY: uninstall5.1 uninstall5.2 uninstall5.3 uninstall
 
